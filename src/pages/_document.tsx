@@ -8,6 +8,10 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
+      <script
+        defer
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`}
+      ></script>
     </Html>
   );
 }
