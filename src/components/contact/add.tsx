@@ -30,6 +30,8 @@ const contactSchema = z.object({
     }),
 });
 
+export type ContactType = z.infer<typeof contactSchema>;
+
 export default function NewContact() {
   const {
     register,
@@ -37,7 +39,7 @@ export default function NewContact() {
     handleSubmit,
     control,
     reset,
-  } = useForm<z.infer<typeof contactSchema>>({
+  } = useForm<ContactType>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
