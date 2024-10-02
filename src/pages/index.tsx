@@ -28,7 +28,7 @@ export default function Home() {
       })
     : 0;
   return (
-    <div className="grid gap-8">
+    <div className="flex gap-8">
       <div className="flex h-screen w-full justify-center">
         <div className="w-full">
           <TabGroup
