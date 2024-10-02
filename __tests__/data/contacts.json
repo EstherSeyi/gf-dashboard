@@ -1,0 +1,31 @@
+[
+  {
+    "name": "John Doe",
+    "phoneNumber": "07036282290",
+    "email": "johndoe@gmail.com",
+    "locationDetails": [
+      {
+        "address": "Fara Park 2 Estate, LGA, Lagos, Nigeria",
+        "longitude": 3.6513324,
+        "latitude": 6.4534389
+      },
+      {
+        "address": "34 Gbadamosi Street, Lagos, Nigeria",
+        "longitude": 3.3589287,
+        "latitude": 6.6473742
+      }
+    ]
+  },
+  {
+    "name": "Bello Hassan",
+    "phoneNumber": "090876543224",
+    "email": "bello@gmail.com",
+    "locationDetails": [
+      {
+        "address": "Sweetwater, TN, USA",
+        "longitude": -84.46103939999999,
+        "latitude": 35.6014636
+      }
+    ]
+  }
+]
