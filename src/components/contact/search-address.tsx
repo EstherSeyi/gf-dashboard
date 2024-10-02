@@ -4,6 +4,7 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/react";
+import { notify } from "src/lib/utils";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -11,12 +12,15 @@ import usePlacesAutocomplete, {
 
 export default function SearchAddress({
   onSelect,
+  existingAddresses = [],
 }: {
   onSelect: (value: {
     address: string;
     longitude: number;
     latitude: number;
+    place_id: string;
   }) => void;
+  existingAddresses?: string[];
 }) {
   const {
     value,
@@ -37,6 +41,15 @@ export default function SearchAddress({
         onChange={(value) => {
           const address = data.find((item) => item.place_id === value);
           if (address) {
+            const existing = existingAddresses.includes(address.place_id);
+            if (existing) {
+              notify({
+                message: "Address already exists",
+                type: "error",
+              });
+              return;
+            }
+
             setValue(address.description);
 
             getGeocode({ address: address.description }).then((results) => {
@@ -45,6 +58,7 @@ export default function SearchAddress({
                 address: address.description,
                 longitude: lng,
                 latitude: lat,
+                place_id: address.place_id,
               });
               setValue("");
             });

@@ -20,6 +20,7 @@ const contactSchema = z.object({
         address: z.string(),
         longitude: z.number(),
         latitude: z.number(),
+        place_id: z.string(),
       })
     )
     .min(1, {
@@ -141,6 +142,7 @@ export default function NewContact() {
                 onSelect={(val) => {
                   prepend(val);
                 }}
+                existingAddresses={fields.map((item) => item.place_id)}
               />
             ) : null}
 
