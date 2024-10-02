@@ -23,6 +23,7 @@ export default function SearchAddress({
   existingAddresses?: string[];
 }) {
   const {
+    ready,
     value,
     suggestions: { data, loading, status },
     setValue,
@@ -34,8 +35,12 @@ export default function SearchAddress({
     debounce: 1000,
   });
 
+  if (!ready) {
+    return <p className="text-sm">Loading address input. Please wait...</p>;
+  }
+
   return (
-    <div className="">
+    <div>
       <Combobox
         value={value}
         onChange={(value) => {
