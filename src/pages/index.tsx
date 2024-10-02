@@ -4,6 +4,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Layout from "src/components/layout";
 import ContactList from "src/components/contact/list";
 import Map from "src/components/contact/map";
+import { useRouter } from "next/router";
 const tabs = [
   {
     title: "Contact List",
@@ -16,11 +17,38 @@ const tabs = [
 ];
 
 export default function Home() {
+  const router = useRouter();
+
+  const selectedIndex = router.query.tab
+    ? tabs.findIndex((item) => {
+        return (
+          item.title.toLowerCase() ===
+          decodeURIComponent(router.query.tab as string)
+        );
+      })
+    : 0;
   return (
     <div className="grid gap-8">
       <div className="flex h-screen w-full justify-center">
         <div className="w-full">
-          <TabGroup>
+          <TabGroup
+            onChange={(selectedIndex) => {
+              const activeTab = tabs[selectedIndex].title;
+              const pathname = router.asPath.split("?")[0];
+
+              router.push(
+                `${pathname}?tab=${encodeURIComponent(
+                  activeTab.toLowerCase()
+                )}`,
+                undefined,
+                {
+                  shallow: true,
+                }
+              );
+              return;
+            }}
+            selectedIndex={selectedIndex}
+          >
             <TabList className="flex gap-4">
               {tabs.map(({ title }) => (
                 <Tab
