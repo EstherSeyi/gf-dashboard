@@ -35,9 +35,13 @@ const Pagination = ({
           >
             <span className="font-semibold">Previous</span>
           </Button>
+
           <Button
             data-testid="pagination-next-button"
-            disabled={metaData.current_page === metaData.total_pages}
+            disabled={
+              metaData.current_page === metaData.total_pages ||
+              metaData.count === 0
+            }
             onClick={() => handlePageChange(metaData.current_page + 1)}
             className="border border-black rounded-lg shadow-sm bg-transparent disabled:opacity-50 px-2 outline-black text-black disabled:cursor-not-allowed"
           >
